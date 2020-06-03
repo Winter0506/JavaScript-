@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>处理各种类型的表单一</title>
+    <!--随着网站的发展，需求会不断发生变化，比如要在基础上增加“简介”字段，可以为空，
+        但是最长不超过60个字符，同时要统计一下，用户输入错误的次数，输入超过3次，就锁定“注册”按钮，
+        然后要“解锁”才能重新使用-->
+</head>
+
+<body>
+    <form method="post" action="" onsubmit="return eg.regCheck();">
+        <input type="hidden" name="" id="errnum" value="0" />
+        账户:<input type="text" name="" id="userid" /><br /><br />
+        密码:<input type="password" name="" id="userpwd" /><br /><br />
+        确认:<input type="password" name="" id="userpwd2" /><br /><br />
+        简介:<textarea type="" rows="4" cols="18" id="about"></textarea><br /><br />
+        <input type="submit" value="注册" id="regBtn" />
+        <input type="button" value="解锁" onclick="eg.unlock()" style="display:none;" id="regUnlock">
+    </form>
+    <script>
+        var eg = {}; //声明一个对象，当做命名空间使用
+        //定义一个公共函数来获取指定id元素，减少代码量，提高代码复用率
+        eg.$ = function (id) {
+            return document.getElementById(id);
+        };
+
+        eg.regCheck = function () {
+            var uid = eg.$("userid")
+            var upwd = eg.$("userpwd")
+            var upwd2 = eg.$("userpwd2")
+
+            if (uid.value == '') {//value是元素自带属性
+                alert("账户不能为空!");
+                eg.err();
+                return false;
+            }
+            if (upwd.value == '') {
+                alert("密码不能为空!");
+                eg.err();
+                return false;
+            }
+            if (upwd.value != upwd2.value) {
+                alert("两次输入密码不相同!");
+                eg.err();
+                return false;
+            }
+            //新增的部分
+            var about = eg.$("about");
+            if (about.value.length > 60) {
+                //value是字符串类型的属性
+                alert('简介太长');
+                eg.err();
+                return false;
+            };
+            return true; //返回true，就会提交表单form
+        };
+        //出错时记录错误次数
+        eg.err = function () {
+            var el = eg.$("errnum");
+            var old = el.value;
+            el.value = parseInt(old) + 1;
+            //把字符串转换成整数+1，并保存起来
+            eg.lock();//用来检查是否应该锁定
+        }
+        //通过次数判断是否要锁定注册
+        eg.lock = function () {
+            var err = eg.$("errnum");
+            if (parseInt(err.value) > 2) {
+                eg.$("regBtn").disabled = true;
+                //根据业务需求，输错3次就锁定
+                eg.$("regUnlock").style.display = "block";
+                //同时显示解锁按钮
+            }
+        };
+        //解锁
+        eg.unlock = function () {
+            eg.$("regBtn").disabled = false;
+            //根据业务需求，解锁就是让你用户可以重新注册
+            eg.$("regUnlock").style.display = "none";
+            //元素所有样式都挂载到style属性下
+        };    
+    </script>
+
+</body>
+
+</html>
