@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        /*
+        组合选择器（Combinators）: 这种选择器可以作用于多个 HTML 元素，有多种组合方式，
+        下面这些方式，CSS 都会作用于 B 元素。
+        通过下面的例子来讲解这些选择器，例子类似于一个树形，表示不同的层级：
+        */
+
+        /* A B {} : A 元素的所有后代元素 B 都会起作用。
+        下面的例子中 div p {}，它会遍历 div 中所有的子元素 p，只要找到 p 元素就应用对应的 CSS 样式，故所有的  p 元素都变成了红色； */
+
+        div p {
+            color: red;
+        }
+
+        /*
+        A > B {} : A 元素的直接子节点会起作用，也就是只适用于 A 节点的第一层所有的子节点。
+        例子中 div > p { } , 只会找到 div 的第一层子节点 p。
+        */
+
+        div > p {
+            color: red;
+        }
+
+        /*
+        A + B {} : 匹配 A 的下一个兄弟节点，AB具有相同的父节点，并且 B 紧跟在 A 的后面；
+        例子中 div + p { } 只会匹配 div 的下一个兄弟节点 p；
+        */
+
+        div + p {
+            color: red;
+        }
+
+        /*
+        A ~ B {} : B是 A 之后的任意一个兄弟节点。例子中 div ~ p { } 会匹配 div 的所有兄弟节点 p；
+        */
+
+        div ~ p {
+            color: red;
+        }
+
+        /*
+        组选择器 A, B：A 和 B 元素具有同一规则的 CSS 样式，不同元素使用逗号隔开。
+        */
+        div,p {
+        color: red;
+        }
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>组合选择器</title>
+</head>
+
+<body>
+    <div>
+        <p>|__div->p1</p>
+        <p>|__div->p2</p>
+        <section>
+            <p>|_____div->section->p</p>
+            <p>|_____div->section->p</p>
+            <div>|_____div->section->div</div>
+        </section>
+    </div>
+    <p>|__p1</p>
+    <p>|__p2</p>
+</body>
+</html>

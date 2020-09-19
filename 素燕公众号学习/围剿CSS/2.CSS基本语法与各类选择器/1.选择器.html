@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        p{
+            color:teal;
+        }
+
+        /*class 选择器：以 “.” 开头，后跟一个名字*/
+        .first{
+            font-weight: bold;
+            text-decoration: line-through;
+        }
+
+        /*ID 选择器：以 “#” 开头，后跟一个选择器的名字，名字必须在当前文档唯一;*/
+        #second {
+            color:tomato;
+        }
+
+        /*通用选择器（Universal selector）：单独一个“ * ”，作用于所有的标签。*/
+
+        * {
+            margin: 2;
+            padding: 1;
+        }
+
+        /*属性选择器（Attribute selectors）：根据属性来匹配HTML元素*/
+        /* 匹配所有使用属性 "lefe" 的元素 */
+        [lefe] {
+            color: green;
+        }
+
+        /*匹配所有使用属性为 "lefe"，且值为 liquid 的元素*/
+        [lefe="liquid"] {
+            background-color: goldenrod;
+        }
+
+        /*匹配所有使用属性为 "lefe"，且值包含 spicy 的元素*/
+        [lefe~="spicy"] {
+            color: red;
+        }
+        /* 还有类似于“正则表达式”的属性选择器，比如：[attr^=val] 匹配以 val 开头的元素，
+        [attr$=val] ,匹配以 val 结尾的元素，[attr*=val]匹配包含 val 的字符串的元素。*/
+
+        /*
+        伪选择器（pseudo-selectors）：它包含伪类（pseudo-classes）和伪元素（pseudo-elements）。
+        这类选择器不是真正意义上的选择器，它作为选择器的一部分，起到选择器匹配元素的限定条件。
+        比如，匹配 dom 树中某个元素的第一个孩子，匹配鼠标点击后的状态等。
+        */
+
+        /* 匹配超链接样式 */
+        
+        a {
+            color: blue;
+            font-weight: bold;
+        }
+
+        /* 访问后的状态 */
+        a:visited {
+            color: yellow;
+        }
+
+        /* 鼠标悬停、点击、聚焦时的样式 */
+        a:hover,
+        a:active,
+        a:focus {
+            color: darkred;
+            text-decoration: none;
+        }
+
+        /*伪元素（pseudo-elements）选择器，它以“ :: ” 为标识符。
+        比如修改首字母的样式。在超链接后添加一个向上的弯曲的箭头：*/
+        
+        /*这个还是不理解*/
+        /*
+        p::first-letter{
+        font-weight: bold;
+        }
+        p::first-line{
+        font-size: 3em;
+        }
+        */
+        
+        /* 尤其下面 */
+        /* [href^=http]::after {
+        content: '⤴';
+        } */
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1.选择器</title>
+</head>
+<body>
+    <p>超越技术</p>
+    <div>哈哈.</div>
+    <p>一起学前端！</p>
+
+    <p class="first">类选择器</p>
+
+    <p id="second">ID选择器</p>
+
+    <ul>
+        <li data-quantity="1kg" lefe>Tomatoes</li>
+        <li data-quantity="3" lefe>Onions</li>
+        <li data-quantity="3" lefe>Garlic</li>
+        <li data-quantity="700g" lefe="not spicy like chili">Red pepper</li>
+        <li data-quantity="2kg" data-meat>Chicken</li>
+        <li data-quantity="optional 150g" data-meat>Bacon bits</li>
+        <li data-quantity="optional 10ml" lefe="liquid">Olive oil</li>
+        <li data-quantity="25cl" lefe="liquid">White wine</li>
+    </ul>
+
+    <a href="https://developer.mozilla.org/" target="_blank">click me</a>
+</body>
+</html>

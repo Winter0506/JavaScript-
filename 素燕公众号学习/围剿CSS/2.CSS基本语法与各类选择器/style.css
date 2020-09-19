@@ -1,0 +1,7 @@
+/*下面这个 CSS 只适用于屏幕超过 800px 的设备：*/
+@media (min-width: 801px) {
+    body {
+      margin: 0 auto;
+      width: 800px;
+    }
+  }
